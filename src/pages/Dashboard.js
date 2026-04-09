@@ -70,13 +70,59 @@ function Dashboard({ tasks, studySessions }) {
 
         {recentTasks.length > 0 ? (
           recentTasks.map(task => (
-            <div key={task.id} className="card" style={{ marginTop: "10px" }}>
-              <p>{task.title}</p>
+            <div
+              key={task.id}
+              className="card"
+              style={{
+                marginTop: "10px",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+              }}
+            >
+              <input type="checkbox" checked={task.completed} readOnly />
+
+              <div>
+                <h4 style={{ margin: 0 }}>{task.title}</h4>
+                <small>
+                  {task.priority} • Due:{" "}
+                  {new Date(task.dueDate).toLocaleDateString()}
+                </small>
+              </div>
             </div>
           ))
         ) : (
           <p>No tasks yet.</p>
         )}
+      </div>
+
+      <div style={{ marginTop: "30px" }}>
+        <h3>Quick Insights</h3>
+
+        <div className="grid">
+          <div className="card">
+            <p>Completion Rate</p>
+            <strong>
+              {totalTasks > 0
+                ? Math.round((completedTasks / totalTasks) * 100)
+                : 0}%
+            </strong>
+          </div>
+
+          <div className="card">
+            <p>Total Study Hours</p>
+            <strong>{totalStudyHours.toFixed(1)}h</strong>
+          </div>
+
+          <div className="card">
+            <p>Avg Session</p>
+            <strong>
+              {studySessions.length > 0
+                ? (totalStudyHours / studySessions.length).toFixed(1)
+                : 0}h
+            </strong>
+          </div>
+        </div>
       </div>
     </div>
   );

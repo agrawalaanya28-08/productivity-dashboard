@@ -30,19 +30,8 @@ const Tracker = ({ studySessions, onAddSession, onDeleteSession }) => {
       <h2>Study Tracker</h2>
 
       <form onSubmit={handleSubmit}>
-        <input
-          value={subject}
-          onChange={(e) => setSubject(e.target.value)}
-          placeholder="Subject"
-        />
-
-        <input
-          type="number"
-          value={duration}
-          onChange={(e) => setDuration(e.target.value)}
-          placeholder="Hours"
-        />
-
+        <input value={subject} onChange={(e) => setSubject(e.target.value)} />
+        <input type="number" value={duration} onChange={(e) => setDuration(e.target.value)} />
         <button type="submit">Add</button>
       </form>
 
@@ -52,7 +41,7 @@ const Tracker = ({ studySessions, onAddSession, onDeleteSession }) => {
       </div>
 
       {studySessions.map((s) => (
-        <div className="card" key={s.id} style={{ marginTop: "10px" }}>
+        <div className="card" key={s.id}>
           <p>{s.subject} - {s.duration} hrs</p>
           <button onClick={() => onDeleteSession(s.id)}>Delete</button>
         </div>

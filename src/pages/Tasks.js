@@ -45,28 +45,14 @@ const Tasks = ({ tasks, setTasks }) => {
       <h2>Task Manager</h2>
 
       <form onSubmit={addTask} style={{ marginTop: "20px" }}>
-        <input
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="Task title"
-        />
-
-        <input
-          type="date"
-          value={dueDate}
-          onChange={(e) => setDueDate(e.target.value)}
-        />
-
-        <select
-          value={priority}
-          onChange={(e) => setPriority(e.target.value)}
-        >
+        <input value={title} onChange={(e) => setTitle(e.target.value)} />
+        <input type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
+        <select value={priority} onChange={(e) => setPriority(e.target.value)}>
           <option>High</option>
           <option>Medium</option>
           <option>Low</option>
         </select>
-
-        <button type="submit">Add</button>
+        <button type="submit">Add Task</button>
       </form>
 
       <div style={{ marginTop: "20px" }}>
