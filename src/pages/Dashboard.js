@@ -1,8 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function Dashboard({ tasks, studySessions }) {
   const totalTasks = tasks.length;
-
   const completedTasks = tasks.filter(task => task.completed).length;
 
   const totalStudyHours = studySessions.reduce(
@@ -25,11 +25,9 @@ function Dashboard({ tasks, studySessions }) {
 
   return (
     <div style={{ padding: "30px", maxWidth: "900px", margin: "auto" }}>
-      
       <h2>Dashboard Overview</h2>
       <p>Welcome back! Here's your productivity summary.</p>
 
-      {/* MAIN STATS */}
       <div className="grid" style={{ marginTop: "20px" }}>
         <div className="card">
           <h3>Total Tasks</h3>
@@ -52,7 +50,6 @@ function Dashboard({ tasks, studySessions }) {
         </div>
       </div>
 
-      {/* EXTRA STATS */}
       <div className="grid" style={{ marginTop: "15px" }}>
         <div className="card">
           <h3>Overdue Tasks</h3>
@@ -67,24 +64,12 @@ function Dashboard({ tasks, studySessions }) {
         </div>
       </div>
 
-      {/* RECENT TASKS */}
       <div style={{ marginTop: "30px" }}>
         <h3>Recent Tasks</h3>
-
         {recentTasks.length > 0 ? (
           recentTasks.map(task => (
-            <div
-              key={task.id}
-              className="card"
-              style={{
-                marginTop: "10px",
-                display: "flex",
-                alignItems: "center",
-                gap: "10px",
-              }}
-            >
+            <div key={task.id} className="card" style={{ marginTop: "10px", display: "flex", gap: "10px" }}>
               <input type="checkbox" checked={task.completed} readOnly />
-
               <div>
                 <h4 style={{ margin: 0 }}>{task.title}</h4>
                 <small>
@@ -98,40 +83,13 @@ function Dashboard({ tasks, studySessions }) {
           <p>No tasks yet.</p>
         )}
       </div>
-
-      {/* INSIGHTS */}
-      <div style={{ marginTop: "30px" }}>
-        <h3>Quick Insights</h3>
-
-        <div className="grid">
-          <div className="card">
-            <p>Completion Rate</p>
-            <strong>
-              {totalTasks > 0
-                ? Math.round((completedTasks / totalTasks) * 100)
-                : 0}
-              %
-            </strong>
-          </div>
-
-          <div className="card">
-            <p>Total Study Hours</p>
-            <strong>{totalStudyHours.toFixed(1)}h</strong>
-          </div>
-
-          <div className="card">
-            <p>Avg Session</p>
-            <strong>
-              {studySessions.length > 0
-                ? (totalStudyHours / studySessions.length).toFixed(1)
-                : 0}
-              h
-            </strong>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }
+
+Dashboard.propTypes = {
+  tasks: PropTypes.array.isRequired,
+  studySessions: PropTypes.array.isRequired,
+};
 
 export default Dashboard;
