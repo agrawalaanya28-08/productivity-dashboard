@@ -20,15 +20,49 @@ const Tracker = ({ studySessions, onAddSession, onDeleteSession }) => {
     setDuration("");
   };
 
+  const totalStudyTime = studySessions.reduce(
+    (sum, s) => sum + s.duration,
+    0
+  );
+
   return (
     <div style={{ padding: "30px", maxWidth: "700px", margin: "auto" }}>
-      {/* UI SAME */}
+      <h2>Study Tracker</h2>
+
+      <form onSubmit={handleSubmit}>
+        <input
+          value={subject}
+          onChange={(e) => setSubject(e.target.value)}
+          placeholder="Subject"
+        />
+
+        <input
+          type="number"
+          value={duration}
+          onChange={(e) => setDuration(e.target.value)}
+          placeholder="Hours"
+        />
+
+        <button type="submit">Add</button>
+      </form>
+
+      <div className="card" style={{ marginTop: "20px" }}>
+        <h3>Total Study Time</h3>
+        <p>{totalStudyTime.toFixed(1)} hrs</p>
+      </div>
+
+      {studySessions.map((s) => (
+        <div className="card" key={s.id} style={{ marginTop: "10px" }}>
+          <p>{s.subject} - {s.duration} hrs</p>
+          <button onClick={() => onDeleteSession(s.id)}>Delete</button>
+        </div>
+      ))}
     </div>
   );
 };
 
 Tracker.propTypes = {
-  studySessions: PropTypes.arrayOf(PropTypes.object).isRequired,
+  studySessions: PropTypes.array.isRequired,
   onAddSession: PropTypes.func.isRequired,
   onDeleteSession: PropTypes.func.isRequired,
 };

@@ -42,13 +42,49 @@ const Tasks = ({ tasks, setTasks }) => {
 
   return (
     <div style={{ padding: "30px", maxWidth: "800px", margin: "auto" }}>
-      {/* UI SAME */}
+      <h2>Task Manager</h2>
+
+      <form onSubmit={addTask} style={{ marginTop: "20px" }}>
+        <input
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Task title"
+        />
+
+        <input
+          type="date"
+          value={dueDate}
+          onChange={(e) => setDueDate(e.target.value)}
+        />
+
+        <select
+          value={priority}
+          onChange={(e) => setPriority(e.target.value)}
+        >
+          <option>High</option>
+          <option>Medium</option>
+          <option>Low</option>
+        </select>
+
+        <button type="submit">Add</button>
+      </form>
+
+      <div style={{ marginTop: "20px" }}>
+        {tasks.map(task => (
+          <TaskCard
+            key={task.id}
+            task={task}
+            toggleComplete={toggleComplete}
+            deleteTask={deleteTask}
+          />
+        ))}
+      </div>
     </div>
   );
 };
 
 Tasks.propTypes = {
-  tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
+  tasks: PropTypes.array.isRequired,
   setTasks: PropTypes.func.isRequired,
 };
 

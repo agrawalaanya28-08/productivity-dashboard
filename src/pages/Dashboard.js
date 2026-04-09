@@ -26,28 +26,65 @@ function Dashboard({ tasks, studySessions }) {
 
   return (
     <div style={{ padding: "30px", maxWidth: "900px", margin: "auto" }}>
-      {/* UI SAME */}
+      <h2>Dashboard Overview</h2>
+      <p>Welcome back! Here's your productivity summary.</p>
+
+      <div className="grid" style={{ marginTop: "20px" }}>
+        <div className="card">
+          <h3>Total Tasks</h3>
+          <p>{totalTasks}</p>
+        </div>
+
+        <div className="card">
+          <h3>Completed Tasks</h3>
+          <p>{completedTasks}</p>
+        </div>
+
+        <div className="card">
+          <h3>Study Hours</h3>
+          <p>{totalStudyHours.toFixed(1)}h</p>
+        </div>
+
+        <div className="card">
+          <h3>Study Sessions</h3>
+          <p>{studySessions.length}</p>
+        </div>
+      </div>
+
+      <div className="grid" style={{ marginTop: "15px" }}>
+        <div className="card">
+          <h3>Overdue Tasks</h3>
+          <p>{overdueTasks}</p>
+        </div>
+
+        <div className="card">
+          <h3>Productivity</h3>
+          <p style={{ color: "#f97316", fontWeight: "bold" }}>
+            {productivity}%
+          </p>
+        </div>
+      </div>
+
+      <div style={{ marginTop: "30px" }}>
+        <h3>Recent Tasks</h3>
+
+        {recentTasks.length > 0 ? (
+          recentTasks.map(task => (
+            <div key={task.id} className="card" style={{ marginTop: "10px" }}>
+              <p>{task.title}</p>
+            </div>
+          ))
+        ) : (
+          <p>No tasks yet.</p>
+        )}
+      </div>
     </div>
   );
 }
 
 Dashboard.propTypes = {
-  tasks: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      title: PropTypes.string,
-      completed: PropTypes.bool,
-      priority: PropTypes.string,
-      dueDate: PropTypes.string,
-    })
-  ).isRequired,
-  studySessions: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-      duration: PropTypes.number,
-      subject: PropTypes.string,
-    })
-  ).isRequired,
+  tasks: PropTypes.array.isRequired,
+  studySessions: PropTypes.array.isRequired,
 };
 
 export default Dashboard;
