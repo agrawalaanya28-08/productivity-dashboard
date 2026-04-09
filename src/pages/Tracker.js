@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 
 const Tracker = ({ studySessions, onAddSession, onDeleteSession }) => {
   const [subject, setSubject] = useState("");
@@ -7,6 +6,7 @@ const Tracker = ({ studySessions, onAddSession, onDeleteSession }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (!subject || duration <= 0) return;
 
     const newSession = {
@@ -16,6 +16,7 @@ const Tracker = ({ studySessions, onAddSession, onDeleteSession }) => {
     };
 
     onAddSession(newSession);
+
     setSubject("");
     setDuration("");
   };
@@ -27,18 +28,15 @@ const Tracker = ({ studySessions, onAddSession, onDeleteSession }) => {
 
   return (
     <div style={{ padding: "30px", maxWidth: "700px", margin: "auto" }}>
-      <h2 style={{ marginBottom: "20px" }}>Study Tracker</h2>
+      
+      <h2>Study Tracker</h2>
 
-      <form onSubmit={handleSubmit} style={{
-        display: "flex",
-        gap: "10px",
-        marginBottom: "20px"
-      }}>
+      <form onSubmit={handleSubmit} style={{ marginTop: "20px" }}>
         <input
           value={subject}
           onChange={(e) => setSubject(e.target.value)}
           placeholder="Subject"
-          style={{ padding: "10px", flex: 1 }}
+          style={{ marginRight: "10px" }}
         />
 
         <input
@@ -46,35 +44,35 @@ const Tracker = ({ studySessions, onAddSession, onDeleteSession }) => {
           value={duration}
           onChange={(e) => setDuration(e.target.value)}
           placeholder="Hours"
-          style={{ padding: "10px", width: "100px" }}
+          style={{ marginRight: "10px" }}
         />
 
-        <button type="submit" style={{ padding: "10px 15px" }}>
-          Add
-        </button>
+        <button type="submit">Add</button>
       </form>
 
-      <div className="card" style={{ marginBottom: "20px" }}>
+      <div className="card" style={{ marginTop: "20px" }}>
         <h3>Total Study Time</h3>
         <p>{totalStudyTime.toFixed(1)} hrs</p>
       </div>
 
-      <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-        {studySessions.map((s) => (
-          <div className="card" key={s.id}>
-            <p>{s.subject} - {s.duration} hrs</p>
-            <button onClick={() => onDeleteSession(s.id)}>Delete</button>
-          </div>
-        ))}
-      </div>
+      {studySessions.map((s) => (
+        <div
+          className="card"
+          key={s.id}
+          style={{ marginTop: "10px" }}
+        >
+          <p>
+            {s.subject} - {s.duration} hrs
+          </p>
+
+          <button onClick={() => onDeleteSession(s.id)}>
+            Delete
+          </button>
+        </div>
+      ))}
+
     </div>
   );
-};
-
-Tracker.propTypes = {
-  studySessions: PropTypes.array.isRequired,
-  onAddSession: PropTypes.func.isRequired,
-  onDeleteSession: PropTypes.func.isRequired,
 };
 
 export default Tracker;

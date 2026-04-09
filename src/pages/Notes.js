@@ -6,12 +6,14 @@ const Notes = () => {
 
   const addNote = () => {
     if (!note) return;
+
     setNotes([...notes, note]);
     setNote("");
   };
 
   return (
     <div style={{ padding: "30px", maxWidth: "700px", margin: "auto" }}>
+      
       <h2>Notes</h2>
 
       <input
@@ -26,11 +28,16 @@ const Notes = () => {
 
       <div style={{ marginTop: "20px" }}>
         {notes.map((n, i) => (
-          <div className="card" key={i} style={{ marginTop: "10px" }}>
+          <div
+            className="card"
+            key={i}
+            style={{ marginTop: "10px" }}
+          >
             {n}
           </div>
         ))}
       </div>
+
     </div>
   );
 };

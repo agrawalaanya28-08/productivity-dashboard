@@ -1,11 +1,12 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 const Status = ({ tasks, studySessions }) => {
   const total = tasks.length;
+
   const completed = tasks.filter((t) => t.completed).length;
 
-  const taskScore = total === 0 ? 0 : (completed / total) * 100;
+  const taskScore =
+    total === 0 ? 0 : (completed / total) * 100;
 
   const totalStudyHours = studySessions.reduce(
     (sum, s) => sum + s.duration,
@@ -20,6 +21,7 @@ const Status = ({ tasks, studySessions }) => {
 
   return (
     <div style={{ padding: "30px", maxWidth: "800px", margin: "auto" }}>
+      
       <h2>Status Overview</h2>
 
       <div className="card" style={{ marginTop: "20px" }}>
@@ -32,13 +34,9 @@ const Status = ({ tasks, studySessions }) => {
         <h3>Productivity Score</h3>
         <h1 style={{ color: "#f97316" }}>{productivity}%</h1>
       </div>
+
     </div>
   );
-};
-
-Status.propTypes = {
-  tasks: PropTypes.array.isRequired,
-  studySessions: PropTypes.array.isRequired,
 };
 
 export default Status;

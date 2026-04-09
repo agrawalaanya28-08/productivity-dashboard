@@ -1,8 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 function Dashboard({ tasks, studySessions }) {
   const totalTasks = tasks.length;
+
   const completedTasks = tasks.filter(task => task.completed).length;
 
   const totalStudyHours = studySessions.reduce(
@@ -11,8 +11,7 @@ function Dashboard({ tasks, studySessions }) {
   );
 
   const overdueTasks = tasks.filter(
-    task =>
-      new Date(task.dueDate) < new Date() && !task.completed
+    task => new Date(task.dueDate) < new Date() && !task.completed
   ).length;
 
   const taskScore =
@@ -26,9 +25,11 @@ function Dashboard({ tasks, studySessions }) {
 
   return (
     <div style={{ padding: "30px", maxWidth: "900px", margin: "auto" }}>
+      
       <h2>Dashboard Overview</h2>
       <p>Welcome back! Here's your productivity summary.</p>
 
+      {/* MAIN STATS */}
       <div className="grid" style={{ marginTop: "20px" }}>
         <div className="card">
           <h3>Total Tasks</h3>
@@ -51,6 +52,7 @@ function Dashboard({ tasks, studySessions }) {
         </div>
       </div>
 
+      {/* EXTRA STATS */}
       <div className="grid" style={{ marginTop: "15px" }}>
         <div className="card">
           <h3>Overdue Tasks</h3>
@@ -65,6 +67,7 @@ function Dashboard({ tasks, studySessions }) {
         </div>
       </div>
 
+      {/* RECENT TASKS */}
       <div style={{ marginTop: "30px" }}>
         <h3>Recent Tasks</h3>
 
@@ -96,6 +99,7 @@ function Dashboard({ tasks, studySessions }) {
         )}
       </div>
 
+      {/* INSIGHTS */}
       <div style={{ marginTop: "30px" }}>
         <h3>Quick Insights</h3>
 
@@ -105,7 +109,8 @@ function Dashboard({ tasks, studySessions }) {
             <strong>
               {totalTasks > 0
                 ? Math.round((completedTasks / totalTasks) * 100)
-                : 0}%
+                : 0}
+              %
             </strong>
           </div>
 
@@ -119,7 +124,8 @@ function Dashboard({ tasks, studySessions }) {
             <strong>
               {studySessions.length > 0
                 ? (totalStudyHours / studySessions.length).toFixed(1)
-                : 0}h
+                : 0}
+              h
             </strong>
           </div>
         </div>
@@ -127,10 +133,5 @@ function Dashboard({ tasks, studySessions }) {
     </div>
   );
 }
-
-Dashboard.propTypes = {
-  tasks: PropTypes.array.isRequired,
-  studySessions: PropTypes.array.isRequired,
-};
 
 export default Dashboard;
