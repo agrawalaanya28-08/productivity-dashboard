@@ -1,20 +1,17 @@
-/* GLOBAL */
 body {
   margin: 0;
-  font-family: "Segoe UI", sans-serif;
-  background-color: #fff7ed;
-  color: #1f2937;
+  font-family: "Segoe UI", sans-serif !important;
+  background-color: #fff7ed !important;
+  color: #1f2937 !important;
 }
 
-/* HEADINGS */
 h2 {
-  color: #ea580c;
+  color: #ea580c !important;
 }
 
-/* BUTTONS */
 button {
-  background-color: #f97316;
-  color: white;
+  background-color: #f97316 !important;
+  color: white !important;
   border: none;
   padding: 8px 14px;
   border-radius: 8px;
@@ -23,22 +20,20 @@ button {
 }
 
 button:hover {
-  background-color: #ea580c;
+  background-color: #ea580c !important;
 }
 
-/* INPUTS */
 input {
-  border: 1px solid #fed7aa;
+  border: 1px solid #fed7aa !important;
   border-radius: 8px;
   padding: 10px;
   outline: none;
 }
 
 input:focus {
-  border-color: #f97316;
+  border-color: #f97316 !important;
 }
 
-/* CARD */
 .card {
   background: #ffffff;
   padding: 25px;
@@ -48,14 +43,12 @@ input:focus {
   text-align: center;
 }
 
-/* GRID */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
 }
 
-/* PRIORITY */
 .priority.high {
   background-color: #dc2626;
   color: white;
