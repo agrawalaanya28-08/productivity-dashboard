@@ -20,20 +20,15 @@ const Tasks = ({ tasks, setTasks }) => {
     };
 
     setTasks([...tasks, newTask]);
-
     setTitle("");
     setDueDate("");
     setPriority("Medium");
   };
 
   const toggleComplete = (id) => {
-    setTasks(
-      tasks.map((task) =>
-        task.id === id
-          ? { ...task, completed: !task.completed }
-          : task
-      )
-    );
+    setTasks(tasks.map((task) =>
+      task.id === id ? { ...task, completed: !task.completed } : task
+    ));
   };
 
   const deleteTask = (id) => {
@@ -42,28 +37,57 @@ const Tasks = ({ tasks, setTasks }) => {
 
   return (
     <div style={{ padding: "30px", maxWidth: "800px", margin: "auto" }}>
-      <h2>Task Manager</h2>
+      <h2 style={{ marginBottom: "20px" }}>Task Manager</h2>
 
-      <form onSubmit={addTask} style={{ marginTop: "20px" }}>
-        <input value={title} onChange={(e) => setTitle(e.target.value)} />
-        <input type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
-        <select value={priority} onChange={(e) => setPriority(e.target.value)}>
+      <form onSubmit={addTask} style={{
+        display: "flex",
+        flexWrap: "wrap",
+        gap: "12px",
+        marginBottom: "25px"
+      }}>
+        <input
+          type="text"
+          placeholder="Task title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          style={{ padding: "10px", flex: 1 }}
+        />
+
+        <input
+          type="date"
+          value={dueDate}
+          onChange={(e) => setDueDate(e.target.value)}
+          style={{ padding: "10px" }}
+        />
+
+        <select
+          value={priority}
+          onChange={(e) => setPriority(e.target.value)}
+          style={{ padding: "10px" }}
+        >
           <option>High</option>
           <option>Medium</option>
           <option>Low</option>
         </select>
-        <button type="submit">Add Task</button>
+
+        <button type="submit" style={{ padding: "10px 15px" }}>
+          Add Task
+        </button>
       </form>
 
-      <div style={{ marginTop: "20px" }}>
-        {tasks.map(task => (
-          <TaskCard
-            key={task.id}
-            task={task}
-            toggleComplete={toggleComplete}
-            deleteTask={deleteTask}
-          />
-        ))}
+      <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+        {tasks.length === 0 ? (
+          <p>No tasks yet 🚀</p>
+        ) : (
+          tasks.map(task => (
+            <TaskCard
+              key={task.id}
+              task={task}
+              toggleComplete={toggleComplete}
+              deleteTask={deleteTask}
+            />
+          ))
+        )}
       </div>
     </div>
   );

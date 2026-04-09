@@ -27,25 +27,46 @@ const Tracker = ({ studySessions, onAddSession, onDeleteSession }) => {
 
   return (
     <div style={{ padding: "30px", maxWidth: "700px", margin: "auto" }}>
-      <h2>Study Tracker</h2>
+      <h2 style={{ marginBottom: "20px" }}>Study Tracker</h2>
 
-      <form onSubmit={handleSubmit}>
-        <input value={subject} onChange={(e) => setSubject(e.target.value)} />
-        <input type="number" value={duration} onChange={(e) => setDuration(e.target.value)} />
-        <button type="submit">Add</button>
+      <form onSubmit={handleSubmit} style={{
+        display: "flex",
+        gap: "10px",
+        marginBottom: "20px"
+      }}>
+        <input
+          value={subject}
+          onChange={(e) => setSubject(e.target.value)}
+          placeholder="Subject"
+          style={{ padding: "10px", flex: 1 }}
+        />
+
+        <input
+          type="number"
+          value={duration}
+          onChange={(e) => setDuration(e.target.value)}
+          placeholder="Hours"
+          style={{ padding: "10px", width: "100px" }}
+        />
+
+        <button type="submit" style={{ padding: "10px 15px" }}>
+          Add
+        </button>
       </form>
 
-      <div className="card" style={{ marginTop: "20px" }}>
+      <div className="card" style={{ marginBottom: "20px" }}>
         <h3>Total Study Time</h3>
         <p>{totalStudyTime.toFixed(1)} hrs</p>
       </div>
 
-      {studySessions.map((s) => (
-        <div className="card" key={s.id}>
-          <p>{s.subject} - {s.duration} hrs</p>
-          <button onClick={() => onDeleteSession(s.id)}>Delete</button>
-        </div>
-      ))}
+      <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+        {studySessions.map((s) => (
+          <div className="card" key={s.id}>
+            <p>{s.subject} - {s.duration} hrs</p>
+            <button onClick={() => onDeleteSession(s.id)}>Delete</button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

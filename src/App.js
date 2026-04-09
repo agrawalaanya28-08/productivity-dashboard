@@ -14,6 +14,11 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [studySessions, setStudySessions] = useState([]);
 
+  // 🔥 CLEAR OLD DATA (for clean demo)
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
+
   // Load tasks
   useEffect(() => {
     const savedTasks = JSON.parse(localStorage.getItem("tasks"));
@@ -24,7 +29,7 @@ function App() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
-  // Load study sessions
+  // Load sessions
   useEffect(() => {
     const savedSessions = JSON.parse(localStorage.getItem("sessions"));
     if (savedSessions) setStudySessions(savedSessions);
@@ -47,34 +52,16 @@ function App() {
       <Navbar />
 
       <Routes>
-        <Route
-          path="/"
-          element={<Dashboard tasks={tasks} studySessions={studySessions} />}
-        />
-
-        <Route
-          path="/tasks"
-          element={<Tasks tasks={tasks} setTasks={setTasks} />}
-        />
-
-        <Route
-          path="/tracker"
-          element={
-            <Tracker
-              studySessions={studySessions}
-              onAddSession={addSession}
-              onDeleteSession={deleteSession}
-            />
-          }
-        />
-
-        <Route
-          path="/status"
-          element={
-            <Status tasks={tasks} studySessions={studySessions} />
-          }
-        />
-
+        <Route path="/" element={<Dashboard tasks={tasks} studySessions={studySessions} />} />
+        <Route path="/tasks" element={<Tasks tasks={tasks} setTasks={setTasks} />} />
+        <Route path="/tracker" element={
+          <Tracker
+            studySessions={studySessions}
+            onAddSession={addSession}
+            onDeleteSession={deleteSession}
+          />
+        }/>
+        <Route path="/status" element={<Status tasks={tasks} studySessions={studySessions} />} />
         <Route path="/notes" element={<Notes />} />
       </Routes>
     </Router>
